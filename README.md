@@ -7,6 +7,81 @@ Bu proje yapısı aşağıdaki görselde gösterilmiştir:
 
 ![PDF Agentic RAG](https://github.com/Therayz1/A-Agents/raw/main/PDF_AGENTIC_RAG.png)
 
+
+
+
+Aşağıda verdiğin komutları ve açıklamaları içeren **README.md** formatına uygun bir yapı oluşturdum. Bu yapı, projenin bir **PgVector Agent Knowledge** modülü içerdiğini ve bunun nasıl kurulacağını detaylı bir şekilde açıklıyor:
+
+---
+
+### **PgVector Agent Knowledge**
+
+Bu modül, PostgreSQL üzerine kurulu **pgvector** eklentisini kullanarak vektör tabanlı bilgi yönetimi sağlar. **PgVector**, veri bilimciler ve yapay zeka uygulamaları için optimize edilmiş vektör aramalarını destekler. 
+
+---
+
+### **Kurulum (Setup)**
+
+Projeyi çalıştırmadan önce aşağıdaki adımları izleyerek PostgreSQL ve **pgvector** ortamını hazırlayın.
+
+#### **1. Docker Konteyneri Çalıştırma**
+PgVector'ı çalıştırmak için aşağıdaki Docker komutunu terminalinizde çalıştırın:
+
+```bash
+docker run -d \
+  -e POSTGRES_DB=ai \
+  -e POSTGRES_USER=ai \
+  -e POSTGRES_PASSWORD=ai \
+  -e PGDATA=/var/lib/postgresql/data/pgdata \
+  -v pgvolume:/var/lib/postgresql/data \
+  -p 5532:5432 \
+  --name pgvector \
+  phidata/pgvector:16
+```
+
+#### **2. Komut Parametreleri Açıklaması**
+
+| **Parametre**                 | **Açıklama**                                                                 |
+|-------------------------------|-----------------------------------------------------------------------------|
+| `POSTGRES_DB=ai`              | PostgreSQL içinde oluşturulacak veritabanı adı.                           |
+| `POSTGRES_USER=ai`            | PostgreSQL kullanıcı adı.                                                 |
+| `POSTGRES_PASSWORD=ai`        | PostgreSQL kullanıcısı için şifre.                                         |
+| `PGDATA=/var/lib/postgresql/data/pgdata` | Veritabanı verilerinin saklanacağı dizin.                            |
+| `-v pgvolume:/var/lib/postgresql/data`  | Docker konteynerine bir hacim (volume) bağlama işlemi.               |
+| `-p 5532:5432`                | PostgreSQL servisini yerel makinenize 5532 numaralı port üzerinden bağlar. |
+| `--name pgvector`             | Docker konteynerinin adı.                                                 |
+| `phidata/pgvector:16`         | Kullanılacak PgVector Docker imajı.                                        |
+
+---
+
+#### **3. PostgreSQL’e Bağlanma**
+
+PgVector konteyneri başarıyla çalıştırıldıktan sonra PostgreSQL’e bağlanmak için aşağıdaki bağlantı parametrelerini kullanabilirsiniz:
+
+- **Host:** `localhost`
+- **Port:** `5532`
+- **Veritabanı Adı:** `ai`
+- **Kullanıcı Adı:** `ai`
+- **Şifre:** `ai`
+
+#### **4. PgVector Eklentisini Doğrulama**
+
+Bağlandıktan sonra PgVector’ın kurulu olduğunu doğrulamak için şu SQL komutunu çalıştırabilirsiniz:
+
+```sql
+CREATE EXTENSION IF NOT EXISTS vector;
+```
+
+---
+
+Bu adımları tamamladıktan sonra **PgVector Agent Knowledge** modülü için PostgreSQL veritabanınız hazır hale gelecektir. 
+
+#### **Destek**
+
+Herhangi bir sorun yaşarsanız lütfen GitHub sayfasında bir konu (issue) oluşturun. 🛠️  
+
+---
+
 ### 1. **Gerekli Kütüphanelerin İçe Aktarılması**
 ```python
 import requests
