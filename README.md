@@ -1,5 +1,12 @@
 Bu Python kodu, bir PDF dosyasını uzaktan okur, metni çıkarır ve bu metni bir bilgi tabanı (knowledge base) içinde depolayarak, bir yapay zeka ajanının bu veriyi kullanarak sorulara cevap vermesini sağlar. Kodun her bir bölümünü detaylı bir şekilde açıklayayım:
 
+
+## PDF Agentic RAG Görseli
+
+Bu proje yapısı aşağıdaki görselde gösterilmiştir:
+
+![PDF Agentic RAG](https://github.com/Therayz1/A-Agents/raw/main/PDF_AGENTIC_RAG.png)
+
 ### 1. **Gerekli Kütüphanelerin İçe Aktarılması**
 ```python
 import requests
